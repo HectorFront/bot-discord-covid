@@ -1,9 +1,21 @@
 require('dotenv').config()
 const axios = require('axios').default;
+const express = require('express');
+const app = express();
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const accessToken = 'ODY2MzY1MDU2NTM1MTAxNDcx.YPRfVQ.8P0dKlDsu65brLe81D7annl1XDM';
+const PORT = process.env.PORT || 8877;
+const accessToken = process.env.TOKEN_DISCORD;
+
+app.listen(PORT, _ => {
+    console.log(`Server in PORT: ${PORT}`)
+});
+
+app.get('/', (req, res) => {
+    res.status(200).json({ msg: '[Status] => OK', token_discord: accessToken });
+});
+
 
 const DEFAULT_MESSAGE = {
     content: '',
@@ -43,7 +55,7 @@ const DEFAULT_DISCORD_ERROR = (msg) => {
 }
 
 client.on('ready', () => {
-    console.log('Status => Ok [Online]');
+    console.log('[Discord Status] => Ok');
 });
 
 client.on('message', (msg) => {
