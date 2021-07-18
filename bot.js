@@ -3,7 +3,7 @@ const axios = require('axios').default;
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const accessToken = 'ODY2MzY1MDU2NTM1MTAxNDcx.YPRfVQ.vL3QgwDHmDaXBuuUGl1Jk14NNdc';
+const accessToken = 'ODY2MzY1MDU2NTM1MTAxNDcx.YPRfVQ.8P0dKlDsu65brLe81D7annl1XDM';
 
 const DEFAULT_MESSAGE = {
     content: '',
