@@ -13,9 +13,8 @@ app.listen(PORT, _ => {
 });
 
 app.get('/', (req, res) => {
-    res.status(200).json({ msg: '[Status] => OK', token_discord: accessToken });
+    res.status(200).json({ server: '[Status] => OK' });
 });
-
 
 const DEFAULT_MESSAGE = {
     content: '',
