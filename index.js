@@ -22,7 +22,7 @@ const DEFAULT_MESSAGE = {
         color: 11416728,
         author: {
             name: null,
-            icon_url: 'https://cdn.discordapp.com/avatars/866365056535101471/b0aee935fb3b0d998cfc0c5c86f5c470.png?size=256'
+            icon_url: null
         },
         description: '',
         footer: {
@@ -69,6 +69,7 @@ client.on('message', (msg) => {
                         if (typeCommand_Client === state_API) {
                             const messageState = { ...DEFAULT_MESSAGE };
                             messageState.embed.author.name = `Estado de ${(state.nome).toUpperCase()}`;
+                            messageState.embed.author.icon_url = 'https://raw.githubusercontent.com/HectorFront/bot-discord-covid/main/icon_state.png?token=ANFRVRCNRBCXBRRL4FBG3IDA6TUWW';
                             messageState.embed.fields = [
                                 {
                                     name: '_Casos confirmados_',
@@ -93,6 +94,7 @@ client.on('message', (msg) => {
                 .then(brasil => {
                     const messageBrazil = { ...DEFAULT_MESSAGE };
                     messageBrazil.embed.author.name = 'BRASIL';
+                    messageState.embed.author.icon_url = 'https://raw.githubusercontent.com/HectorFront/bot-discord-covid/main/icon_brazil.png?token=ANFRVRDUUANXZU3WBEUHT5DA6TU4A';
                     messageBrazil.embed.fields = [
                         {
                             name: '(Confirmados) _Em acompanhamento_',
@@ -133,6 +135,7 @@ client.on('message', (msg) => {
                         if (typeCommand_Client === city_API) {
                             const messageCity = { ...DEFAULT_MESSAGE };
                             messageCity.embed.author.name = (city.nome).toUpperCase();
+                            messageState.embed.author.icon_url = 'https://raw.githubusercontent.com/HectorFront/bot-discord-covid/main/icon_city.png?token=ANFRVRCBFTNKJWOXIB2K2FTA6TU56';
                             messageCity.embed.fields = [
                                 {
                                     name: '_Casos confirmados_',
