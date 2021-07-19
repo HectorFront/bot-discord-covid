@@ -84,7 +84,7 @@ client.on('message', (msg) => {
                                     value: `${state.incidenciaObito}%`,
                                 }
                             ];
-                            return msg.channel.send(messageState);
+                            msg.channel.send(messageState);
                         }
                     });
                 }).catch(_ => DEFAULT_DISCORD_ERROR(msg));
@@ -123,7 +123,7 @@ client.on('message', (msg) => {
                             value: `${formatNumber(brasil.obitos.total)}`,
                         }
                     ];
-                    return msg.channel.send(messageBrazil);
+                    msg.channel.send(messageBrazil);
                 }).catch(_ => DEFAULT_DISCORD_ERROR(msg));
         } else {
             ExecutorGETRequest('PortalMunicipio')
@@ -142,7 +142,7 @@ client.on('message', (msg) => {
                                     value: `${formatNumber(city.obitosAcumulado)} Pessoas`,
                                 }
                             ];
-                            return msg.channel.send(messageCity);
+                            msg.channel.send(messageCity);
                         }
                     });
                 }).catch(_ => DEFAULT_DISCORD_ERROR(msg));
