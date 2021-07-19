@@ -123,7 +123,7 @@ client.on('message', (msg) => {
                             value: `${formatNumber(brasil.obitos.total)}`,
                         }
                     ];
-                    msg.channel.send(messageBrazil);
+                    return msg.channel.send(messageBrazil);
                 }).catch(_ => DEFAULT_DISCORD_ERROR(msg));
         } else {
             ExecutorGETRequest('PortalMunicipio')
