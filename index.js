@@ -1,19 +1,36 @@
 require('dotenv').config()
 const axios = require('axios').default;
-const express = require('express');
-const app = express();
 const Discord = require('discord.js');
+const http = require('http');
+const express = require('express')
+const app = express();
+const { createTerminus } = require('@godaddy/terminus');
 const client = new Discord.Client();
 
 const PORT = process.env.PORT || 8877;
 const accessToken = process.env.TOKEN_DISCORD;
 
-app.listen(PORT, _ => {
-    console.log(`Server in PORT: ${PORT}`)
+app.get('/', (req, res) => {
+    res.status(200).send('BOT => [ok]');
 });
 
-app.get('/', (req, res) => {
-    res.status(200).json({ server: '[Status] => OK' });
+const server = http.createServer(app)
+
+const onSignal = () => {
+    console.log('server is starting cleanup')
+    // start cleanup of resource, like databases or file descriptors
+}
+
+const onHealthCheck = async () => {
+    // checks if the system is healthy, like the db connection is live
+    // resolves, if health, rejects if not
+    console.log({ server: '[Status] => OK' });
+}
+
+createTerminus(server, {
+    signal: 'SIGINT',
+    healthChecks: { '/healthcheck': onHealthCheck },
+    onSignal
 });
 
 const DEFAULT_MESSAGE = {
@@ -47,11 +64,11 @@ const ExecutorGETRequest = (route) => {
             .then(response => resolve(response.data))
             .catch(_ => reject());
     })
-}
+};
 
 const DEFAULT_DISCORD_ERROR = (msg) => {
     msg.reply('Aconteceu algum erro, volte novamente mais tarde! byKatraka');
-}
+};
 
 client.on('ready', () => {
     console.log('[Discord Status] => Ok');
@@ -151,3 +168,4 @@ client.on('message', (msg) => {
 });
 
 client.login(accessToken);
+server.listen(PORT);
