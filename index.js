@@ -58,7 +58,15 @@ const formatString = (str) => {
     return (str.normalize("NFD").replace(/[^a-zA-Zs]/g, "")).toLowerCase();
 };
 
-const ExecutorGETRequest = (route) => {
+const ExecutorStatusHealth = () => {
+    return new Promise((resolve, reject) => {
+        axios.get('https://katraka-covid.herokuapp.com/')
+            .then(_ => resolve('Check API [Ok]'))
+            .catch(_ => reject('Failed API [error]'));
+    });
+};
+
+const ExecutorGETRequestCOVID = (route) => {
     return new Promise((resolve, reject) => {
         axios.get(`${process.env.API_HOST}/${route}`)
             .then(response => resolve(response.data))
@@ -79,7 +87,7 @@ client.on('message', (msg) => {
     if (msgClient.includes('covid')) {
         const typeCommand_Client = msgClient.replace('covid', '');
         if (typeCommand_Client.length === 2) {
-            ExecutorGETRequest('PortalEstado')
+            ExecutorGETRequestCOVID('PortalEstado')
                 .then(states => {
                     states.map(state => {
                         const state_API = formatString(state.nome);
@@ -106,7 +114,7 @@ client.on('message', (msg) => {
                     });
                 }).catch(_ => DEFAULT_DISCORD_ERROR(msg));
         } else if (typeCommand_Client === 'brasil') {
-            ExecutorGETRequest('PortalGeralApi')
+            ExecutorGETRequestCOVID('PortalGeralApi')
                 .then(brasil => {
                     const messageBrazil = { ...DEFAULT_MESSAGE };
                     messageBrazil.embed.author.name = 'BRASIL';
@@ -143,7 +151,7 @@ client.on('message', (msg) => {
                     msg.channel.send(messageBrazil);
                 }).catch(_ => DEFAULT_DISCORD_ERROR(msg));
         } else {
-            ExecutorGETRequest('PortalMunicipio')
+            ExecutorGETRequestCOVID('PortalMunicipio')
                 .then(citys => {
                     citys.map(city => {
                         const city_API = formatString(city.nome);
@@ -168,4 +176,10 @@ client.on('message', (msg) => {
 });
 
 client.login(accessToken);
-server.listen(PORT);
+server.listen(PORT, () => {
+    setInterval(() => {
+        ExecutorStatusHealth()
+            .then(log => console.log(log))
+            .catch(err => console.log(err));
+    }, 30000);
+});
