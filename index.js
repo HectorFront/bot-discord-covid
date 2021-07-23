@@ -120,31 +120,31 @@ client.on('message', (msg) => {
                     messageBrazil.embed.author.name = 'BRASIL';
                     messageBrazil.embed.fields = [
                         {
-                            name: 'Confirmados >> ~~Em acompanhamento~~',
+                            name: 'Confirmados >> __Em acompanhamento__',
                             value: `${formatNumber(brasil.confirmados.acompanhamento)} Pessoas`,
                         }, {
-                            name: 'Confirmados >> ~~Incidência~~/100 Mil hab',
+                            name: 'Confirmados >> __Incidência__/100 Mil hab',
                             value: `${brasil.confirmados.incidencia}`,
                         }, {
-                            name: 'Confirmados >> ~~Novos~~',
+                            name: 'Confirmados >> __Novos__',
                             value: `${formatNumber(brasil.confirmados.novos)} Pessoas`,
                         }, {
-                            name: 'Confirmados >> ~~Recuperados~~',
+                            name: 'Confirmados >> __Recuperados__',
                             value: `${formatNumber(brasil.confirmados.recuperados)} Pessoas`,
                         }, {
-                            name: 'Confirmados >> ~~Total de casos~~',
+                            name: 'Confirmados >> __Total de casos__',
                             value: `${formatNumber(brasil.confirmados.total)} Pessoas`,
                         }, {
-                            name: 'Óbitos >> ~~Letalidade~~/100 mil hab',
+                            name: 'Óbitos >> __Letalidade__/100 mil hab',
                             value: `${brasil.obitos.letalidade}%`,
                         }, {
-                            name: 'Óbitos >> ~~Mortalidade~~/100 mil hab',
+                            name: 'Óbitos >> __Mortalidade__/100 mil hab',
                             value: `${brasil.obitos.mortalidade}`,
                         }, {
-                            name: 'Óbitos >> ~~Novos~~',
+                            name: 'Óbitos >> __Novos__',
                             value: `${formatNumber(brasil.obitos.novos)}`,
                         }, {
-                            name: 'Óbitos >> ~~Total~~',
+                            name: 'Óbitos >> __Total__',
                             value: `${formatNumber(brasil.obitos.total)}`,
                         }
                     ];
