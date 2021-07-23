@@ -4,8 +4,9 @@ const Discord = require('discord.js');
 const http = require('http');
 const express = require('express')
 const app = express();
-const { createTerminus } = require('@godaddy/terminus');
 const client = new Discord.Client();
+const { createTerminus } = require('@godaddy/terminus');
+const codStateBRAZIL = require('./constants/cod-uf');
 
 const PORT = process.env.PORT || 8877;
 const accessToken = process.env.TOKEN_DISCORD;
@@ -17,13 +18,10 @@ app.get('/', (req, res) => {
 const server = http.createServer(app)
 
 const onSignal = () => {
-    console.log('server is starting cleanup')
-    // start cleanup of resource, like databases or file descriptors
+    console.log('server is starting cleanup');
 }
 
 const onHealthCheck = async () => {
-    // checks if the system is healthy, like the db connection is live
-    // resolves, if health, rejects if not
     console.log({ server: '[Status] => OK' });
 }
 
@@ -93,22 +91,26 @@ client.on('message', (msg) => {
                         const state_API = formatString(state.nome);
                         if (typeCommand_Client === state_API) {
                             const messageState = { ...DEFAULT_MESSAGE };
-                            messageState.embed.author.name = `Estado de ${(state.nome).toUpperCase()}`;
-                            messageState.embed.fields = [
-                                {
-                                    name: '_Casos confirmados_',
-                                    value: `${formatNumber(state.casosAcumulado)} Pessoas`,
-                                }, {
-                                    name: '_Óbitos acumulado_',
-                                    value: `${formatNumber(state.obitosAcumulado)} Pessoas`,
-                                }, {
-                                    name: '_Incidência_/100 mil hab.',
-                                    value: `${state.incidencia}`,
-                                }, {
-                                    name: '_Incidência de óbito_/100 mil hab.',
-                                    value: `${state.incidenciaObito}`,
+                            codStateBRAZIL.map(ufBrazil => {
+                                if(ufBrazil.uf === (state.nome).toUpperCase()) {
+                                    messageState.embed.author.name = `Estado de (${ufBrazil.nome} - ${ufBrazil.uf})`;
+                                    messageState.embed.fields = [
+                                        {
+                                            name: '_Casos confirmados_',
+                                            value: `${formatNumber(state.casosAcumulado)} Pessoas`,
+                                        }, {
+                                            name: '_Óbitos acumulado_',
+                                            value: `${formatNumber(state.obitosAcumulado)} Pessoas`,
+                                        }, {
+                                            name: '_Incidência_/100 mil hab.',
+                                            value: `${state.incidencia}`,
+                                        }, {
+                                            name: '_Incidência de óbito_/100 mil hab.',
+                                            value: `${state.incidenciaObito}`,
+                                        }
+                                    ];
                                 }
-                            ];
+                            });
                             msg.channel.send(messageState);
                         }
                     });
@@ -157,16 +159,20 @@ client.on('message', (msg) => {
                         const city_API = formatString(city.nome);
                         if (typeCommand_Client === city_API) {
                             const messageCity = { ...DEFAULT_MESSAGE };
-                            messageCity.embed.author.name = (city.nome).toUpperCase();
-                            messageCity.embed.fields = [
-                                {
-                                    name: '_Casos confirmados_',
-                                    value: `${formatNumber(city.casosAcumulado)} Pessoas`,
-                                }, {
-                                    name: '_Óbitos acumulado_',
-                                    value: `${formatNumber(city.obitosAcumulado)} Pessoas`,
+                            codStateBRAZIL.map(ufBrazil => {
+                                if(ufBrazil.codigo_uf === Number(city.cod.substr(0, 2))) {
+                                    messageCity.embed.author.name = `${(city.nome).toUpperCase()} >> (${ufBrazil.nome} - ${ufBrazil.uf})`
+                                    messageCity.embed.fields = [
+                                        {
+                                            name: '_Casos confirmados_',
+                                            value: `${formatNumber(city.casosAcumulado)} Pessoas`,
+                                        }, {
+                                            name: '_Óbitos acumulado_',
+                                            value: `${formatNumber(city.obitosAcumulado)} Pessoas`,
+                                        }
+                                    ];
                                 }
-                            ];
+                            });
                             msg.channel.send(messageCity);
                         }
                     });
