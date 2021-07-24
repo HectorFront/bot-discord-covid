@@ -96,16 +96,16 @@ client.on('message', (msg) => {
                                     messageState.embed.author.name = `Estado de (${ufBrazil.nome} - ${ufBrazil.uf})`;
                                     messageState.embed.fields = [
                                         {
-                                            name: '_Casos confirmados_',
+                                            name: 'Casos confirmados',
                                             value: `${formatNumber(state.casosAcumulado)} Pessoas`,
                                         }, {
-                                            name: '_Óbitos acumulado_',
+                                            name: 'Óbitos acumulado',
                                             value: `${formatNumber(state.obitosAcumulado)} Pessoas`,
                                         }, {
-                                            name: '_Incidência_/100 mil hab.',
+                                            name: 'Incidência/100 mil hab.',
                                             value: `${state.incidencia}`,
                                         }, {
-                                            name: '_Incidência de óbito_/100 mil hab.',
+                                            name: 'Incidência de óbito/100 mil hab.',
                                             value: `${state.incidenciaObito}`,
                                         }
                                     ];
@@ -122,32 +122,32 @@ client.on('message', (msg) => {
                     messageBrazil.embed.author.name = 'BRASIL';
                     messageBrazil.embed.fields = [
                         {
-                            name: 'Confirmados >> __Em acompanhamento__',
+                            name: 'Pessoas >> Em acompanhamento',
                             value: `${formatNumber(brasil.confirmados.acompanhamento)} Pessoas`,
                         }, {
-                            name: 'Confirmados >> __Incidência__/100 Mil hab',
-                            value: `${brasil.confirmados.incidencia}`,
-                        }, {
-                            name: 'Confirmados >> __Novos__',
-                            value: `${formatNumber(brasil.confirmados.novos)} Pessoas`,
-                        }, {
-                            name: 'Confirmados >> __Recuperados__',
+                            name: 'Pessoas >> Recuperadas',
                             value: `${formatNumber(brasil.confirmados.recuperados)} Pessoas`,
                         }, {
-                            name: 'Confirmados >> __Total de casos__',
+                            name: 'Infectados >> Novos',
+                            value: `${formatNumber(brasil.confirmados.novos)} Pessoas`,
+                        }, {
+                            name: 'Infectados >> Total de casos',
                             value: `${formatNumber(brasil.confirmados.total)} Pessoas`,
                         }, {
-                            name: 'Óbitos >> __Letalidade__/100 mil hab',
+                            name: 'Infectados >> Incidência/100 Mil hab',
+                            value: `${brasil.confirmados.incidencia}`,
+                        }, {
+                            name: 'Óbitos >> Letalidade/100 mil hab',
                             value: `${brasil.obitos.letalidade}%`,
                         }, {
-                            name: 'Óbitos >> __Mortalidade__/100 mil hab',
+                            name: 'Óbitos >> Mortalidade/100 mil hab',
                             value: `${brasil.obitos.mortalidade}`,
                         }, {
-                            name: 'Óbitos >> __Novos__',
-                            value: `${formatNumber(brasil.obitos.novos)}`,
+                            name: 'Óbitos >> Novos',
+                            value: `${formatNumber(brasil.obitos.novos)} Pessoas`,
                         }, {
-                            name: 'Óbitos >> __Total__',
-                            value: `${formatNumber(brasil.obitos.total)}`,
+                            name: 'Óbitos >> Total',
+                            value: `${formatNumber(brasil.obitos.total)} Pessoas`,
                         }
                     ];
                     msg.channel.send(messageBrazil);
@@ -164,10 +164,10 @@ client.on('message', (msg) => {
                                     messageCity.embed.author.name = `${(city.nome).toUpperCase()} >> (${ufBrazil.nome} - ${ufBrazil.uf})`
                                     messageCity.embed.fields = [
                                         {
-                                            name: '_Casos confirmados_',
+                                            name: 'Casos confirmados',
                                             value: `${formatNumber(city.casosAcumulado)} Pessoas`,
                                         }, {
-                                            name: '_Óbitos acumulado_',
+                                            name: 'Óbitos acumulado',
                                             value: `${formatNumber(city.obitosAcumulado)} Pessoas`,
                                         }
                                     ];
