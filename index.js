@@ -58,7 +58,7 @@ const formatString = (str) => {
 
 const ExecutorStatusHealth = () => {
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:8877/')
+        axios.get('https://covidbrasilbot.herokuapp.com/')
             .then(_ => resolve('Check API [Ok]'))
             .catch(_ => reject('Failed API [error]'));
     });
