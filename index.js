@@ -58,7 +58,7 @@ const formatString = (str) => {
 
 const ExecutorStatusHealth = () => {
     return new Promise((resolve, reject) => {
-        axios.get('https://katraka-covid.herokuapp.com/')
+        axios.get('http://localhost:8877/')
             .then(_ => resolve('Check API [Ok]'))
             .catch(_ => reject('Failed API [error]'));
     });
@@ -187,5 +187,5 @@ server.listen(PORT, () => {
         ExecutorStatusHealth()
             .then(log => console.log(log))
             .catch(err => console.log(err));
-    }, 30000);
+    }, 600000);
 });
