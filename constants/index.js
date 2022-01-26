@@ -141,12 +141,12 @@ const EMBED_MESSAGE_DC = {
         color: 11416728,
         author: {
             name: null,
-            icon_url: 'https://inovarevistorias.com.br/assets/pointer.png'
+            icon_url: ''
         },
         description: '',
         footer: {
-            icon_url: 'https://www.vippng.com/png/full/372-3727616_h-png-helium-logo.png',
-            text: '© Desenvolvido por Hector Silva (Entertainments Katraka)'
+            icon_url: '',
+            text: '© Desenvolvido por Hector Silva#6727'
         },
         fields: []
     }

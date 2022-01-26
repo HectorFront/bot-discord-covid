@@ -11,8 +11,8 @@ module.exports = {
         const collect = command.split(' ')[1] ?? '';
         if (command.includes('covid')) {
             const REQUIREMENTS = {
-                state: collect.length === 2, // Example: covid SP
-                brazil: collect === 'brasil' // Example: covid brasil
+                state: collect.length === 2,
+                brazil: collect === 'brasil'
             };
             if(REQUIREMENTS.state) {
                 Commands.STATE(collect, msg);
