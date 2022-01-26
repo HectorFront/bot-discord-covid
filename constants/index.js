@@ -1,4 +1,4 @@
-const uf = [{
+const COD_UF = [{
         "codigo_uf": 11,
         "uf": "RO",
         "nome": "Rondônia",
@@ -135,4 +135,21 @@ const uf = [{
     }
 ];
 
-module.exports = uf;
+const EMBED_MESSAGE_DC = {
+    content: '',
+    embed: {
+        color: 11416728,
+        author: {
+            name: null,
+            icon_url: 'https://inovarevistorias.com.br/assets/pointer.png'
+        },
+        description: '',
+        footer: {
+            icon_url: 'https://www.vippng.com/png/full/372-3727616_h-png-helium-logo.png',
+            text: '© Desenvolvido por Hector Silva (Entertainments Katraka)'
+        },
+        fields: []
+    }
+};
+
+module.exports = { COD_UF, EMBED_MESSAGE_DC };
